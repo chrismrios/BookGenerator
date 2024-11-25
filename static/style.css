@@ -1,0 +1,167 @@
+/* Custom Styles */
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #fafafa;
+    color: #333;
+}
+
+nav .brand-logo {
+    font-size: 1.5rem;
+}
+
+.tabs .tab a {
+    color: #546e7a;
+}
+
+.tabs .tab a.active {
+    color: #37474f;
+}
+
+.tabs .indicator {
+    background-color: #607d8b;
+}
+
+.card.horizontal {
+    height: auto;
+}
+
+.card.horizontal .card-image img {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.card.horizontal .card-stacked {
+    overflow: hidden;
+}
+
+.card.horizontal .card-stacked .card-content {
+    padding: 10px;
+}
+
+.card.horizontal .card-stacked .card-action {
+    padding: 10px;
+}
+
+.book-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.book-authors,
+.book-published-date,
+.book-added-at {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.modal {
+    max-height: 90%;
+}
+
+.modal.small-modal {
+    width: 50% !important;
+    max-height: 80% !important;
+}
+
+.modal-content h5 {
+    margin-top: 0;
+}
+
+#toast-container {
+    bottom: 10%;
+    right: 5%;
+}
+
+input[type="text"]:focus:not([readonly]) {
+    border-bottom: 1px solid #607d8b;
+    box-shadow: 0 1px 0 0 #607d8b;
+}
+
+input[type="text"]::placeholder {
+    color: #9e9e9e;
+}
+
+.btn {
+    background-color: #607d8b;
+}
+
+.btn:hover {
+    background-color: #546e7a;
+}
+
+.card-panel {
+    padding: 10px;
+}
+
+#selected-library-info {
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    color: #333;
+}
+
+input[type="text"]:focus:not([readonly]) + label {
+    color: #607d8b;
+}
+
+input[type="text"]:focus:not([readonly]) {
+    border-bottom: 1px solid #607d8b;
+    box-shadow: 0 1px 0 0 #607d8b;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+}
+
+.chip .material-icons {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.sticky-button {
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+}
+
+#selected-library-info,
+#libraries-header,
+#libraries-search,
+#search-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fafafa;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#libraries-header,
+#libraries-search {
+    background-color: #fafafa;
+}
+
+#library-content {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .modal.small-modal {
+        width: 90% !important;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal-header .btn {
+    margin-right: 10px;
+}

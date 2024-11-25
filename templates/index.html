@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Organizer</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="blue-grey darken-4">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">📚 Book Organizer</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#search-tab">Search Books</a></li>
+                <li><a href="#libraries-tab">Your Libraries</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Tabs Navigation -->
+        <ul id="tabs" class="tabs">
+            <li class="tab col s6"><a href="#search-tab" class="active">Search Books</a></li>
+            <li class="tab col s6"><a href="#libraries-tab">Your Libraries</a></li>
+        </ul>
+
+        <!-- Search Tab Content -->
+        <div id="search-tab" class="col s12">
+            <!-- Selected Library Info -->
+            <div id="selected-library-info" class="card-panel teal lighten-4">
+                <span id="selected-library-name">No library selected.</span>
+            </div>
+            <!-- Search Bar -->
+            <div class="row" id="search-bar">
+                <div class="input-field col s12 m10">
+                    <input id="search-query" type="text" placeholder="Search for books by title, author, or genre..." onkeypress="handleSearchKeyPress(event)">
+                </div>
+                <div class="input-field col s12 m2">
+                    <button class="btn waves-effect waves-light blue-grey darken-1" onclick="searchBooks()">Search</button>
+                </div>
+            </div>
+            <!-- Search Results -->
+            <div id="search-results" class="row"></div>
+        </div>
+
+        <!-- Libraries Tab Content -->
+        <div id="libraries-tab" class="col s12">
+            <!-- Libraries Content -->
+            <div id="libraries-content">
+                <!-- Create Library Button -->
+                <div class="row" id="libraries-header">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light blue-grey darken-1" onclick="createLibraryPrompt()">Create Library</button>
+                        <button class="btn waves-effect waves-light blue-grey darken-1" onclick="exportLibraries()">Export Libraries</button>
+                    </div>
+                </div>
+                <!-- Library Search -->
+                <div class="row" id="libraries-search">
+                    <div class="input-field col s12">
+                        <input id="library-search" type="text" placeholder="Search Libraries..." onkeyup="filterLibraries()">
+                    </div>
+                </div>
+                <!-- Library List or Books -->
+                <div id="library-content" class="row"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Search in Library -->
+    <div id="library-book-search" class="row" style="display: none;">
+        <div class="input-field col s12">
+            <input id="library-book-search-input" type="text" placeholder="Search Books in Library..." onkeyup="filterLibraryBooks()">
+        </div>
+    </div>
+
+    <!-- Book Details Modal -->
+    <div id="book-details-modal" class="modal small-modal">
+        <div class="modal-content" id="book-details-content">
+            <!-- Close Button and Add to Library Button will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container"></div>
+
+    <!-- Materialize JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

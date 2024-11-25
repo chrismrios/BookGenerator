@@ -1,0 +1,19 @@
+# Python cache files
+__pycache__/
+path/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment files
+.env
+.venv/
+
+# IDE settings
+.vscode/
+*.idea/
+
+# Build files
+build/
+dist/
+*.egg-info/
