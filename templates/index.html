@@ -9,83 +9,190 @@
     <!-- Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav class="blue-grey darken-4">
-        <div class="nav-wrapper container">
-            <a href="#" class="brand-logo">📚 Book Organizer</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#search-tab">Search Books</a></li>
-                <li><a href="#libraries-tab">Your Libraries</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Tabs Navigation -->
-        <ul id="tabs" class="tabs">
-            <li class="tab col s6"><a href="#search-tab" class="active">Search Books</a></li>
-            <li class="tab col s6"><a href="#libraries-tab">Your Libraries</a></li>
-        </ul>
-
-        <!-- Search Tab Content -->
-        <div id="search-tab" class="col s12">
-            <!-- Selected Library Info -->
-            <div id="selected-library-info" class="card-panel teal lighten-4">
-                <span id="selected-library-name">No library selected.</span>
+    <!-- Side Navigation -->
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <!-- Create Library Button -->
+        <li>
+            <div class="center-align" style="margin-top: 20px;">
+                <a href="#!" onclick="createLibraryPrompt()" class="btn btn-modern">Create Library</a>
             </div>
+        </li>
+        <li><div class="divider"></div></li>
+        <!-- Navigation Links -->
+        <li><a href="#!" onclick="navigateTo('search')">Search Books</a></li>
+        <li><a href="#!" onclick="navigateTo('libraries')">Your Libraries</a></li>
+        <li><div class="divider"></div></li>
+        <!-- Libraries List -->
+        <li><a class="subheader">Libraries</a></li>
+        <div id="nav-library-list">
+            <!-- Libraries will be populated here -->
+        </div>
+    </ul>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Search Books Content -->
+        <div id="search-tab" class="tab-content">
             <!-- Search Bar -->
             <div class="row" id="search-bar">
-                <div class="input-field col s12 m10">
+                <div class="input-field col s10">
                     <input id="search-query" type="text" placeholder="Search for books by title, author, or genre..." onkeypress="handleSearchKeyPress(event)">
                 </div>
-                <div class="input-field col s12 m2">
-                    <button class="btn waves-effect waves-light blue-grey darken-1" onclick="searchBooks()">Search</button>
+                <div class="input-field col s2">
+                    <button class="btn btn-modern" onclick="searchBooks()">Search</button>
                 </div>
+            </div>
+            <!-- View Toggle Button -->
+            <div class="right-align" style="margin-bottom: 10px;">
+                <button class="btn-flat" onclick="toggleView('search')"><i class="material-icons">view_module</i></button>
             </div>
             <!-- Search Results -->
             <div id="search-results" class="row"></div>
         </div>
 
-        <!-- Libraries Tab Content -->
-        <div id="libraries-tab" class="col s12">
-            <!-- Libraries Content -->
-            <div id="libraries-content">
-                <!-- Create Library Button -->
-                <div class="row" id="libraries-header">
-                    <div class="input-field col s12">
-                        <button class="btn waves-effect waves-light blue-grey darken-1" onclick="createLibraryPrompt()">Create Library</button>
-                        <button class="btn waves-effect waves-light blue-grey darken-1" onclick="exportLibraries()">Export Libraries</button>
+        <!-- Your Libraries Content -->
+        <div id="libraries-tab" class="tab-content" style="display:none;">
+            <!-- Libraries Header with Export/Import and Search -->
+            <div id="your-libraries-header" class="row" style="margin-bottom: 10px;">
+                <div class="col s12 m6">
+                    <h5>Your Libraries</h5>
+                </div>
+                <div class="col s12 m6 right-align">
+                    <div class="button-group">
+                        <button class="btn btn-modern" onclick="exportLibraries()">Export All</button>
+                        <button class="btn btn-modern" onclick="importLibraries()">Import</button>
                     </div>
                 </div>
-                <!-- Library Search -->
-                <div class="row" id="libraries-search">
-                    <div class="input-field col s12">
-                        <input id="library-search" type="text" placeholder="Search Libraries..." onkeyup="filterLibraries()">
+                <div class="col s12">
+                    <div class="input-field">
+                        <input id="library-search-query" type="text" placeholder="Search Libraries by Name..." onkeyup="searchYourLibraries()">
+                        <label for="library-search-query">Search Libraries</label>
                     </div>
                 </div>
-                <!-- Library List or Books -->
-                <div id="library-content" class="row"></div>
             </div>
+            <!-- Libraries List -->
+            <div id="your-libraries-list" class="row"></div>
         </div>
-    </div>
 
-    <!-- Book Search in Library -->
-    <div id="library-book-search" class="row" style="display: none;">
-        <div class="input-field col s12">
-            <input id="library-book-search-input" type="text" placeholder="Search Books in Library..." onkeyup="filterLibraryBooks()">
+        <!-- Selected Library Content -->
+        <div id="selected-library-tab" class="tab-content" style="display:none;">
+            <!-- Library Header -->
+            <div id="library-header" style="display: none;">
+                <div class="row">
+                    <div class="col s8">
+                        <h5 id="library-name"></h5>
+                        <p id="library-book-count"></p>
+                    </div>
+                    <div class="col s4 right-align">
+                        <!-- Pass currentLibrary.id to deleteLibraryPrompt -->
+                        <button class="btn red lighten-1" onclick="deleteLibraryPrompt(currentLibrary.id)">Delete Library</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Library Book Search and Filters -->
+            <div class="row" id="library-book-search" style="display: none;">
+                <div class="input-field col s12 m4">
+                    <input id="library-book-search-input" type="text" placeholder="Search Books in Library..." onkeyup="filterLibraryBooks()">
+                </div>
+                <div class="input-field col s12 m2">
+                    <select id="genre-filter" onchange="filterLibraryBooks()">
+                        <option value="" disabled selected>Filter by Genre</option>
+                        <!-- Populate genres dynamically -->
+                    </select>
+                    <label>Genre</label>
+                </div>
+                <div class="input-field col s12 m2">
+                    <select id="rating-filter" onchange="filterLibraryBooks()">
+                        <option value="" disabled selected>Filter by Rating</option>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                    <label>Rating</label>
+                </div>
+                <!-- Read and Unread Filters Grouped Together -->
+                <div class="col s12 m2 read-toggle">
+                    <p>
+                        <label>
+                            <input type="checkbox" id="read-filter" onchange="filterLibraryBooks()"/>
+                            <span>Read</span>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <input type="checkbox" id="unread-filter" onchange="filterLibraryBooks()"/>
+                            <span>Unread</span>
+                        </label>
+                    </p>
+                </div>
+            </div>
+            <!-- Back to Library List and Controls -->
+            <div id="back-button-container" style="display: none; margin-bottom: 20px;">
+                <button class="btn btn-modern" onclick="goBackToLibraryList()">Back to Library List</button>
+                <!-- View Toggle Button -->
+                <button class="btn-flat right" onclick="toggleView('library')"><i class="material-icons">view_module</i></button>
+                <!-- Sort Toggle Buttons -->
+                <button class="btn-flat right" onclick="toggleSortOrder('alpha_asc')"><i class="material-icons">sort_by_alpha</i></button>
+                <button class="btn-flat right" onclick="toggleSortOrder('date_desc')"><i class="material-icons">schedule</i></button>
+            </div>
+            <!-- Library Content -->
+            <div id="library-content" class="row"></div>
         </div>
     </div>
 
     <!-- Book Details Modal -->
-    <div id="book-details-modal" class="modal small-modal">
+    <div id="book-details-modal" class="modal large-modal">
         <div class="modal-content" id="book-details-content">
-            <!-- Close Button and Add to Library Button will be inserted here -->
+            <!-- Modal content will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <!-- Create Library Modal -->
+    <div id="create-library-modal" class="modal">
+        <div class="modal-content">
+            <h5>Create New Library</h5>
+            <div class="row">
+                <form class="col s12" id="create-library-form">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="library-name-input" type="text" required>
+                            <label for="library-name-input">Library Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="library-tags-input" type="text" placeholder="Optional: Comma-separated tags">
+                            <label for="library-tags-input">Tags</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-modern">Create</button>
+                        <button type="button" class="btn-flat modal-close">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal for Deleting Library -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h5>Confirm Deletion</h5>
+            <p>Are you sure you want to delete this library? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn red" id="confirm-delete-btn">Delete</button>
+            <button class="btn-flat modal-close">Cancel</button>
         </div>
     </div>
 

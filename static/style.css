@@ -1,167 +1,365 @@
 /* Custom Styles */
 
+/* Body */
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background: #fafafa;
+    background: #f4f6f8;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
-nav .brand-logo {
-    font-size: 1.5rem;
+/* Main Content */
+.main-content {
+    margin-left: 300px; /* Width of the sidenav */
+    padding: 20px;
 }
 
-.tabs .tab a {
-    color: #546e7a;
+/* Sidenav */
+.sidenav {
+    width: 300px;
 }
 
-.tabs .tab a.active {
-    color: #37474f;
+.sidenav li {
+    margin-bottom: 5px;
 }
 
-.tabs .indicator {
-    background-color: #607d8b;
-}
-
-.card.horizontal {
-    height: auto;
-}
-
-.card.horizontal .card-image img {
-    width: 80px;
-    height: 120px;
-    object-fit: cover;
-}
-
-.card.horizontal .card-stacked {
-    overflow: hidden;
-}
-
-.card.horizontal .card-stacked .card-content {
-    padding: 10px;
-}
-
-.card.horizontal .card-stacked .card-action {
-    padding: 10px;
-}
-
-.book-title {
+.sidenav li a.active-library {
+    background-color: #eceff1;
     font-weight: bold;
-    font-size: 1.2rem;
-    margin: 0;
 }
 
-.book-authors,
-.book-published-date,
-.book-added-at {
-    font-size: 1rem;
-    margin: 0;
-}
-
-.modal {
-    max-height: 90%;
-}
-
-.modal.small-modal {
-    width: 50% !important;
-    max-height: 80% !important;
-}
-
-.modal-content h5 {
-    margin-top: 0;
-}
-
-#toast-container {
-    bottom: 10%;
-    right: 5%;
-}
-
-input[type="text"]:focus:not([readonly]) {
-    border-bottom: 1px solid #607d8b;
-    box-shadow: 0 1px 0 0 #607d8b;
-}
-
-input[type="text"]::placeholder {
-    color: #9e9e9e;
-}
-
-.btn {
-    background-color: #607d8b;
-}
-
-.btn:hover {
-    background-color: #546e7a;
-}
-
-.card-panel {
-    padding: 10px;
-}
-
-#selected-library-info {
-    margin-top: 20px;
-}
-
-input[type="text"] {
-    color: #333;
-}
-
-input[type="text"]:focus:not([readonly]) + label {
-    color: #607d8b;
-}
-
-input[type="text"]:focus:not([readonly]) {
-    border-bottom: 1px solid #607d8b;
-    box-shadow: 0 1px 0 0 #607d8b;
-}
-
-.chip {
-    display: inline-flex;
+/* Buttons */
+.btn-modern {
+    background: linear-gradient(45deg, #6c757d, #343a40);
+    color: white !important;
+    font-weight: bold;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    margin: 5px;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
 }
 
-.chip .material-icons {
-    cursor: pointer;
-    margin-left: 5px;
+.btn-modern:hover {
+    background: linear-gradient(45deg, #5a6268, #23272b);
 }
 
-.sticky-button {
-    position: sticky;
-    top: 10px;
-    z-index: 10;
-}
-
-#selected-library-info,
-#libraries-header,
-#libraries-search,
-#search-bar {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: #fafafa;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#libraries-header,
-#libraries-search {
-    background-color: #fafafa;
-}
-
-#library-content {
-    margin-top: 20px;
-}
-
-@media only screen and (max-width: 600px) {
-    .modal.small-modal {
-        width: 90% !important;
-    }
+/* Modal */
+.modal.large-modal {
+    width: 80% !important;
+    max-height: 80% !important;
 }
 
 .modal-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.modal-header .btn {
-    margin-right: 10px;
+.modal-content h5 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Book Card */
+.book-card .book-image img {
+    object-fit: cover;
+    height: 120px; /* Increased height for better visibility */
+    width: 90px; /* Adjusted width proportionally */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex Container for List View */
+.card-content-flex {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* Optimized gap for better spacing */
+}
+
+/* Book Details */
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; /* Allow the details to take up remaining space */
+}
+
+/* Book Details Paragraphs */
+.book-details p {
+    margin: 4px 0; /* Reduced margins for compactness */
+    padding: 0;
+    font-size: 14px; /* Consistent font size */
+    line-height: 1.4;
+}
+
+/* Specific Styling for Strong Labels */
+.book-details p strong {
+    display: inline-block;
+    width: 80px; /* Fixed width for labels */
+    font-weight: 500;
+}
+
+/* Buttons Container */
+/* Updated to align items to the start and use gap for consistent spacing */
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Changed from space-between to align items to the start */
+    gap: 10px; /* Added gap for standard padding between buttons */
+    padding: 10px 15px 10px 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Remove margin-right from child elements to utilize gap */
+.buttons-container a,
+.buttons-container label,
+.buttons-container button {
+    margin-right: 0; /* Removed margin-right to prevent extra spacing */
+}
+
+/* Style for Add to Library Button */
+/* Positioned immediately to the right of Details button with standard padding */
+.buttons-container .btn-flat.green-text {
+    color: #4CAF50; /* Green color for distinction */
+    padding: 0 8px; /* Standard horizontal padding */
+    cursor: pointer;
+}
+
+/* Hover effect for Add to Library Button */
+.buttons-container .btn-flat.green-text:hover {
+    color: #388E3C; /* Darker green on hover */
+}
+
+/* Read Toggle */
+/* Reduced spacing between checkbox and label for compactness */
+.read-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap between checkbox and label */
+}
+
+/* Ensure toggles are aligned horizontally */
+.read-toggle span {
+    font-size: 14px;
+}
+
+/* Star Rating */
+.star-rating .star {
+    cursor: pointer;
+    color: #ff9800;
+    font-size: 20px;
+    margin-right: 2px;
+}
+
+.star-rating .star.selected {
+    color: #ff9800;
+}
+
+/* Remove Button */
+.remove-button {
+    color: #d32f2f;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative; /* Positioning for tooltip */
+}
+
+.remove-button:hover {
+    color: #b71c1c;
+}
+
+/* Tooltip for Remove Button */
+/* Assuming Materialize's tooltip is used, remove custom tooltip styles */
+/* Removed custom tooltip to prevent conflicts with Materialize */
+.remove-button::after {
+    /* No custom tooltip */
+}
+
+/* Description Scrollable in Modal */
+.modal-content .description {
+    max-height: 200px; /* Increased max-height for better readability */
+    overflow-y: auto;
+    padding: 5px 0;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 992px) {
+    .main-content {
+        margin-left: 0;
+    }
+    .sidenav {
+        transform: translateX(-105%);
+    }
+
+    /* Adjust book-card-image for smaller screens */
+    .book-card .book-image img {
+        height: 100px;
+        width: 75px;
+    }
+
+    /* Adjust list view images for smaller screens */
+    .book-card .horizontal-book-card .book-image img {
+        height: 100px;
+        width: 75px;
+    }
+
+    /* Adjust grid view images for smaller screens */
+    .book-card .book-card-image img {
+        height: 100px;
+        width: 75px;
+    }
+
+    /* Buttons Container */
+    .buttons-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px; /* Reduced gap for smaller screens */
+    }
+
+    .buttons-container a,
+    .buttons-container label,
+    .buttons-container button {
+        margin-right: 0;
+    }
+}
+
+/* Additional Styles for Filters */
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-container select,
+.filter-container input[type="checkbox"] + span {
+    margin-right: 15px;
+}
+
+/* Consistent Card Heights */
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Genre Label Styling */
+.book-genres {
+    font-style: italic;
+    color: #757575;
+}
+
+/* Adjust Read Toggle */
+.card-content p label {
+    font-weight: normal;
+}
+
+/* Adjust Modal Content Layout */
+.modal-content .row {
+    margin-bottom: 0;
+}
+
+/* Adjust Star Rating Alignment */
+.modal-content .star {
+    vertical-align: middle;
+}
+
+/* Improved Book Title Styling */
+.book-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+/* Button Hover Effects */
+/* Ensures that buttons have a subtle background change on hover */
+.buttons-container a:hover,
+.buttons-container button:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+/* Button Group Styling */
+/* Ensures Export and Import buttons are spaced consistently */
+.button-group {
+    display: inline-flex; /* Use inline-flex to allow alignment within the parent */
+    gap: 10px; /* Space between buttons */
+}
+
+@media only screen and (max-width: 600px) {
+    /* Adjust button group on smaller screens */
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .button-group .btn {
+        width: 100%;
+    }
+}
+
+/* Style for Add to Library Button */
+/* Ensures "Add to Library" button is distinct and properly spaced */
+.buttons-container .btn-flat.green-text {
+    color: #4CAF50; /* Green color for distinction */
+    padding: 0 8px; /* Standard horizontal padding */
+    cursor: pointer;
+}
+
+.buttons-container .btn-flat.green-text:hover {
+    color: #388E3C; /* Darker green on hover */
+}
+
+.book-card .book-image img {
+    /* Existing styles */
+    cursor: pointer; /* Indicates that the image is clickable */
+}
+
+.book-card .book-image img:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Read Toggle */
+/* Reduced spacing between checkbox and label for compactness */
+.read-toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Reduced gap between checkbox and label */
+}
+
+/* Ensure toggles are aligned horizontally */
+.read-toggle span {
+    font-size: 36px;
+}
+
+/* Rating Label Styling */
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between label and stars */
+    margin-left: 10px; /* Optional: Adjust as needed */
+}
+
+.rating-label {
+    font-weight: bold;
+    font-size: 14px; /* Adjust font size as needed */
+}
+
+/* Remove Button Aligned to Far Right */
+.remove-button-right {
+    margin-left: auto; /* Pushes the button to the far right */
 }
